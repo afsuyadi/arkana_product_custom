@@ -1,0 +1,74 @@
+<odoo>
+  <data>
+
+    <record model="ir.ui.view" id="product_product_reimburse_categories_tree_view">
+            <field name="name">product.product.reimburse.categories.tree.view</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <tree class="o_expense_categories">
+                    <field name="name"/>
+                    <field name="is_plafon" widget="boolean_toggle" />
+                    <field name="plafon_value"/>
+                    <field name="amount" invisible="1"/>                    
+                </tree>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="product_product_reimburse_categories_form_view">
+            <field name="name">product.product.reimburse.categories.form.view</field>
+            <field name="model">product.product</field>
+            <field name="arch" type="xml">
+                <form string="Reimburse Categories">
+                  <!-- <div>
+                  </div> -->
+                  <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="is_plafon" widget="boolean_toggle" />
+                        <field name="plafon_value"/>
+                        <field name="amount" invisible="1"/> 
+                    </group>
+                  </sheet>                   
+                </form>
+            </field>
+        </record>
+    
+    <record id="hr_reimburse_product" model="ir.actions.act_window">
+            <field name="name">Reimburse Categories</field>
+            <field name="res_model">product.product</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <!-- <field name="search_view_id" ref="product.product_search_form_view"/> -->
+            <!-- <field name="context">{"default_can_be_expensed": 1, 'default_detailed_type': 'service'}</field> -->
+            <!-- <field name="domain">[('can_be_expensed', '=', True)]</field> -->
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                No expense categories found. Let's create one!
+              </p><p>
+                Expense categories can be reinvoiced to your customers.
+              </p>
+            </field>
+        </record>
+
+    <record id="hr_reimburse_product_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="product_product_reimburse_categories_tree_view"/>
+            <field name="act_window_id" ref="hr_reimburse_product"/>
+        </record>
+
+    <record id="hr_reimburse_product_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="product_product_reimburse_categories_form_view"/>
+            <field name="act_window_id" ref="hr_reimburse_product"/>
+        </record>
+    
+    <!-- <menuitem id="menu_hr_expense_configuration" name="Configuration" parent="menu_hr_expense_root"
+            sequence="100"/> -->
+
+    <menuitem id="menu_hr_product_reimburse" name="Reimburse Categories" parent="hr_expense.menu_hr_expense_configuration"
+            action="hr_reimburse_product" sequence="9"/>
+
+
+  </data>
+</odoo>
