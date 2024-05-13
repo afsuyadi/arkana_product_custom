@@ -1,0 +1,19 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="product_product_expense_form_view_inherit">
+            <field name="name">product.product.expense.form.view.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="hr_expense.product_product_expense_form_view"/>
+            <field name="arch" type="xml">
+              <xpath expr="//group[@name='product_details']" position="inside">
+                <group string="Employee Reimbursement">
+                  <field name="employee_ids" widget="many2many_tags"/>
+                  <field name="is_ceiling" widget="boolean_toggle" string="Ceiling / Plafon"/>
+                  <field name="ceiling_value" widget="monetary" invisible="is_ceiling == False"
+                  />
+                </group>
+              </xpath>                
+            </field>
+        </record>
+  </data>
+</odoo>

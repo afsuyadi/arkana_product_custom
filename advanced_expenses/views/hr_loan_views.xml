@@ -1,0 +1,27 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_loan_form_view_inherit">
+            <field name="name">hr.loan.form.view.inherit</field>
+            <field name="model">hr.loan</field>
+            <field name="inherit_id" ref="loan_management.hr_loan_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='loan_type_id']" position="after">
+                    <field name="expense_id" context="{'tree_view_ref': 'advanced_expenses.hr_expense_view_my_expenses_tree'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_expense_view_my_expenses_tree">
+            <field name="name">hr.expense.view.my.expenses.tree.inherit</field>
+            <field name="model">hr.expense</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date"/>
+                     <field name="name"/>
+                    <field name="payment_mode"/>
+                    <field name="difference" string="Loan Amount"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
